@@ -1,0 +1,37 @@
+# Eclipse
+bin/
+*.launch
+.settings
+.metadata
+.classpath
+.project
+.eclipse/
+
+# IntelliJ IDEA
+out/
+*.ipr
+*.iws
+*.iml
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Gradle
+build/
+.gradle/
+!gradle-wrapper.jar
+
+# Runtime
+run/
+runs/
+run-data/
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Mod output
+repo/
+*.zip

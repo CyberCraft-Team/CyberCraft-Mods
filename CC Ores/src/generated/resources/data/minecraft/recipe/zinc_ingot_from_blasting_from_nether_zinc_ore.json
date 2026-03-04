@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "group": "nether_zinc",
+  "ingredient": {
+    "item": "ccores:nether_zinc_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "ccores:zinc_ingot"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "group": "end_nickel",
+  "ingredient": {
+    "item": "ccores:end_nickel_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "ccores:nickel_ingot"
+  }
+}

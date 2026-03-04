@@ -1,0 +1,13 @@
+{
+  "itemGroup.cybercraftranks": "Example Mod Tab",
+  "block.cybercraftranks.example_block": "Example Block",
+  "item.cybercraftranks.example_item": "Example Item",
+
+  "cybercraftranks.configuration.title": " CyberCraft Ranks Configs",
+  "cybercraftranks.configuration.section.cybercraftranks.common.toml": " CyberCraft Ranks Configs",
+  "cybercraftranks.configuration.section.cybercraftranks.common.toml.title": " CyberCraft Ranks Configs",
+  "cybercraftranks.configuration.items": "Item List",
+  "cybercraftranks.configuration.logDirtBlock": "Log Dirt Block",
+  "cybercraftranks.configuration.magicNumberIntroduction": "Magic Number Text",
+  "cybercraftranks.configuration.magicNumber": "Magic Number"
+}

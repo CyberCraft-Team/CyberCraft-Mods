@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "ccores:iridium_ingot"
+    }
+  },
+  "pattern": [
+    "III",
+    "III",
+    "III"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ccores:iridium_block"
+  }
+}

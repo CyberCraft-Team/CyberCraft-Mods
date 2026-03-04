@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "ccores:block/zinc_block"
+    }
+  }
+}

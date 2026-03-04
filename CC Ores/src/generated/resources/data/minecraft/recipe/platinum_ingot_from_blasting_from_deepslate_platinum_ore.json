@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "group": "platinum",
+  "ingredient": {
+    "item": "ccores:deepslate_platinum_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "ccores:platinum_ingot"
+  }
+}

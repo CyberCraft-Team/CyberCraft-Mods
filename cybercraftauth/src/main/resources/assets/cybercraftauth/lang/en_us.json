@@ -1,0 +1,13 @@
+{
+  "itemGroup.cybercraftauth": "Example Mod Tab",
+  "block.cybercraftauth.example_block": "Example Block",
+  "item.cybercraftauth.example_item": "Example Item",
+
+  "cybercraftauth.configuration.title": "CyberCraft Auth Configs",
+  "cybercraftauth.configuration.section.cybercraftauth.common.toml": "CyberCraft Auth Configs",
+  "cybercraftauth.configuration.section.cybercraftauth.common.toml.title": "CyberCraft Auth Configs",
+  "cybercraftauth.configuration.items": "Item List",
+  "cybercraftauth.configuration.logDirtBlock": "Log Dirt Block",
+  "cybercraftauth.configuration.magicNumberIntroduction": "Magic Number Text",
+  "cybercraftauth.configuration.magicNumber": "Magic Number"
+}

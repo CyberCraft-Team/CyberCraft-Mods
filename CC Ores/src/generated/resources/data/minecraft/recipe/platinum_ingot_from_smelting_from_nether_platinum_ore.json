@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "nether_platinum",
+  "ingredient": {
+    "item": "ccores:nether_platinum_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "ccores:platinum_ingot"
+  }
+}
