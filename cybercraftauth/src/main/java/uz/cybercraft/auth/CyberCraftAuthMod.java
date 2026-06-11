@@ -90,7 +90,7 @@ public class CyberCraftAuthMod {
      * Launcher oldindan session yaratgan bo'lsa, allowed: true qaytadi.
      */
     private boolean verifySession(String username, String uuid) throws Exception {
-        URL url = new URL(API_URL + "/api/minecraft/verify/");
+        URL url = new URL(API_URL + "/api/v1/minecraft/verify/");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         try {
