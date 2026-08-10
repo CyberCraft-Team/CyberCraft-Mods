@@ -18,6 +18,7 @@ public class CyberCraftRanks {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     private static String API_URL = "http://127.0.0.1:8000";
+    private static String API_KEY = "";
     private static int tickCounter = 0;
     private static final int UPDATE_INTERVAL = 20 * 60; // Har 60 sekundda yangilash
 
@@ -31,6 +32,15 @@ public class CyberCraftRanks {
             API_URL = apiUrl;
         }
 
+        // Shared secret; must match MOD_API_KEY in the backend .env.
+        String apiKey = System.getProperty("cybercraft.key");
+        if (apiKey != null && !apiKey.isEmpty()) {
+            API_KEY = apiKey;
+        } else {
+            LOGGER.warn("-Dcybercraft.key is not set. A production backend "
+                    + "will reject every rank lookup.");
+        }
+
         LOGGER.info("CyberCraft Ranks Mod initialized");
         LOGGER.info("API URL: {}", API_URL);
     }
@@ -38,6 +48,7 @@ public class CyberCraftRanks {
     private void commonSetup(FMLCommonSetupEvent event) {
         LOGGER.info("CyberCraft Ranks - Common Setup");
         RankManager.setApiUrl(API_URL);
+        RankManager.setApiKey(API_KEY);
     }
 
     @SubscribeEvent

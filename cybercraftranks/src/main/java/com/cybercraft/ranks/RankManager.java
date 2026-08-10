@@ -23,9 +23,16 @@ public class RankManager {
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final Gson GSON = new Gson();
     private static String API_URL = "http://127.0.0.1:8000";
+    private static String API_KEY = "";
 
     // Player ranklarini cache qilish
     private static final Map<String, RankData> rankCache = new ConcurrentHashMap<>();
+
+    public static void setApiKey(String key) {
+        if (key != null && !key.isEmpty()) {
+            API_KEY = key;
+        }
+    }
 
     public static void setApiUrl(String url) {
         API_URL = url;
@@ -93,12 +100,15 @@ public class RankManager {
      */
     private static RankData fetchPlayerRank(String username) throws Exception {
         String encodedUsername = URLEncoder.encode(username, StandardCharsets.UTF_8);
-        URL url = new URL(API_URL + "/api/rewards/player-rank/?username=" + encodedUsername);
+        URL url = new URL(API_URL + "/api/v1/rewards/player-rank/?username=" + encodedUsername);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         try {
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
+            if (!API_KEY.isEmpty()) {
+                conn.setRequestProperty("X-CyberCraft-Key", API_KEY);
+            }
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);
 

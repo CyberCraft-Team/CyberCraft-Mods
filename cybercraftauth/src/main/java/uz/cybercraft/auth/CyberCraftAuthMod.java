@@ -26,12 +26,22 @@ public class CyberCraftAuthMod {
     private static final Gson GSON = new Gson();
 
     private static String API_URL = "http://127.0.0.1:8000";
+    private static String API_KEY = "";
 
     public CyberCraftAuthMod() {
         // API URL ni system property dan o'qish (server ishga tushirilganda)
         String apiUrl = System.getProperty("cybercraft.api");
         if (apiUrl != null && !apiUrl.isEmpty()) {
             API_URL = apiUrl;
+        }
+
+        // Shared secret; must match MOD_API_KEY in the backend .env.
+        String apiKey = System.getProperty("cybercraft.key");
+        if (apiKey != null && !apiKey.isEmpty()) {
+            API_KEY = apiKey;
+        } else {
+            LOGGER.warn("[CyberCraft Auth] -Dcybercraft.key is not set. "
+                    + "A production backend will reject every verification.");
         }
 
         LOGGER.info("[CyberCraft Auth] Server-only mod initialized");
@@ -96,6 +106,9 @@ public class CyberCraftAuthMod {
         try {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
+            if (!API_KEY.isEmpty()) {
+                conn.setRequestProperty("X-CyberCraft-Key", API_KEY);
+            }
             conn.setDoOutput(true);
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);
