@@ -13,13 +13,14 @@ Yangi rudalar va bloklar qo'shuvchi mod — o'z ichiga oladi:
 - O'yin dunyosida generatsiya (worldgen)
 - Advancements
 
-### cybercraftauth
-
-Minecraft server uchun autentifikatsiya modi — backend API bilan integratsiya.
-
 ### cybercraftranks
 
 Minecraft server uchun rank tizimi modi.
+
+> `cybercraftauth` olib tashlandi. "Faqat CyberCraft Launcher orqali kirish"
+> qoidasi endi backend tomonida ta'minlanadi: yggdrasil'da parol bilan kirish
+> yopilgan (`YGGDRASIL_ALLOW_PASSWORD_LOGIN=False`), ya'ni token faqat
+> launcher orqali beriladi. Eski kod git tarixida qoldi.
 
 ## Texnologiyalar
 
