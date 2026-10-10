@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      # One mod failing must not hide the state of the other two.
+      # One mod failing must not hide the state of the other mod.
       fail-fast: false
       matrix:
-        mod: ["CC Ores", "cybercraftauth", "cybercraftranks"]
+        mod: ["CC Ores", "cybercraftranks"]
 
     steps:
       - uses: actions/checkout@v4

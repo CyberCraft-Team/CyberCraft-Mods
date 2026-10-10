@@ -6,6 +6,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.registration.NetworkRegistry;
 import org.slf4j.Logger;
 
 import java.util.LinkedHashMap;
@@ -54,6 +55,10 @@ public final class RankService {
 
         RankBackend.fetch(Map.of(uuid, name)).thenAccept(ranks ->
                 server.execute(() -> {
+                    // Ignore a completed lookup for a departed or replaced session.
+                    if (server.getPlayerList().getPlayer(uuid) != player) {
+                        return;
+                    }
                     RankData rank = ranks.getOrDefault(uuid, RankData.fallback(uuid, name));
                     CACHE.put(uuid, rank);
                     TeamPrefixes.apply(player, rank);
@@ -102,13 +107,24 @@ public final class RankService {
 
     private static void sendSnapshotTo(ServerPlayer player) {
         if (!CACHE.isEmpty()) {
-            PacketDistributor.sendToPlayer(player, new RankSyncPayload(List.copyOf(CACHE.values())));
+            sendToPlayer(player, new RankSyncPayload(List.copyOf(CACHE.values())));
+        }
+    }
+
+    private static void sendToPlayer(ServerPlayer player, RankSyncPayload payload) {
+        // Optional registration permits joining without the mod, but sending
+        // an unnegotiated payload still throws on those connections.
+        if (NetworkRegistry.hasChannel(player.connection, RankSyncPayload.TYPE.id())) {
+            PacketDistributor.sendToPlayer(player, payload);
         }
     }
 
     private static void broadcast(MinecraftServer server, List<RankData> changed) {
         if (!changed.isEmpty()) {
-            PacketDistributor.sendToAllPlayers(new RankSyncPayload(changed));
+            RankSyncPayload payload = new RankSyncPayload(changed);
+            for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+                sendToPlayer(player, payload);
+            }
         }
     }
 }
