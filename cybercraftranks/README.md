@@ -1,55 +1,53 @@
-# CyberCraft Ranks Mod
+# CyberCraft Ranks
 
-Bu mod o'yinchilarning ranklarini TAB menyusida ko'rsatadi.
+Minecraft 1.21.1 uchun NeoForge modi. Java 21 talab qilinadi.
+Kompilyatsiya NeoForge 21.1.229 bilan bajariladi; metadata minimal
+21.1.215 versiyasini qabul qiladi. Haqiqiy moslikni o'yinda tekshiring.
 
-## Setup
+## Build
 
-1. **NeoForge Generator'dan base fayllarni oling:**
-   - https://neoforged.net/mod-generator/
-   - Minecraft: 1.21.1
-   - NeoForge: 21.1.215
-   - Mod ID: `cybercraftranks`
-   - Package: `uz.cybercraft.ranks`
-2. **Generatsiya qilingan fayllarni shu papkaga joylashtiring:**
-   - `build.gradle`
-   - `settings.gradle`
-   - `gradle.properties`
-   - `gradlew`, `gradlew.bat`
-   - `gradle/` papkasi
-   - `src/` papkasi
-
-3. **Keyin menga ayting** va men Java kodlarni yozib beraman:
-   - `CyberCraftRanksMod.java` - Asosiy mod
-   - `RankManager.java` - Rank ma'lumotlarini boshqarish
-   - `TabListHandler.java` - TAB menyusini o'zgartirish
-
-## Rank Format
-
-TAB menyusida ko'rinadigan format:
-
-```
-§7[Player]§f Username
-§a[VIP]§f Username
-§b[MVP]§f Username
-§d[Elite]§f Username
-§6[Legend]§f Username
+```sh
+./gradlew build
 ```
 
-## API Endpoint
+Natija: `build/libs/cybercraftranks-1.0.0.jar`. Versiya
+`gradle.properties` faylidagi `mod_version` orqali belgilanadi.
 
-Mod quyidagi API dan rank oladi:
+## Server sozlamalari
 
+JAR faylini NeoForge serverining `mods/` papkasiga joylashtiring.
+Ranklar backenddan faqat server tomonidan olinadi. Server JVM argumentlari:
+
+```text
+-Dcybercraft.api=https://api.cybercraft.uz
+-Dcybercraft.key=<backend MOD_API_KEY qiymati>
 ```
-GET /api/rewards/player-rank/?username=PlayerName
+
+`cybercraft.api` backendning asosiy manzili; `/api/v1` qo'shmang.
+JVM `-D` argumentlarini server ishga tushirish buyrug'ida `-jar` dan oldin
+bering. CyberCraft Backend boshqaradigan serverlarga bu qiymatlarni panel
+o'zi uzatadi (`BACKEND_URL` va `MOD_API_KEY`).
+
+Kalit maxfiy: klient modpackiga, umumiy manifestga, JAR ichiga yoki Gitga
+joylamang. Klientlar rank ma'lumotlarini serverdan oladi va bu kalitga muhtoj
+emas. Kalit berilmasa yoki backend qiymatiga mos kelmasa, backend 403 qaytaradi.
+
+## API
+
+Kod online o'yinchilar UUIDlarini bitta so'rovda yuboradi:
+
+```http
+POST /api/v1/rewards/player-ranks/
+Content-Type: application/json
+X-CyberCraft-Key: <server kaliti>
 ```
 
-Response:
+So'rov tanasi: `{"uuids":["<o'yinchi UUID>"]}`. Javob UUID bo'yicha
+`rank`, `color_code` va `priority` maydonlarini qaytaradi; backendda yo'q
+o'yinchilar javobga kiritilmaydi.
 
-```json
-{
-  "username": "PlayerName",
-  "rank": "Player",
-  "color_code": "§7",
-  "formatted": "§7[Player]§f PlayerName"
-}
-```
+Server vanilla TAB prefikslarini scoreboard orqali ko'rsatadi. Klientdagi
+mod qo'shimcha nishonlar, nameplate, ranklar oynasi va HUD uchun ishlatiladi;
+klientda bu mod bo'lmasa ham serverga ulanish mumkin.
+
+Reliz tekshiruvlari: [RELEASE.md](../docs/RELEASE.md).

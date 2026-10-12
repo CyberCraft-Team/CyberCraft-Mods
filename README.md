@@ -37,3 +37,6 @@ Har bir mod papkasida:
 ```
 
 Build natijasi `build/libs/` papkasida .jar fayl sifatida paydo bo'ladi.
+
+CI JAR fayllarini SHA-256 nazorat summalari bilan 30 kun saqlaydi.
+Reliz tayyorlash va o'yindagi tekshiruvlar: [docs/RELEASE.md](docs/RELEASE.md).
